@@ -49,7 +49,9 @@ void drv8323s_init(void) {
 	// DRV8323S SPI
 	palSetPadMode(DRV8323S_MISO_GPIO, DRV8323S_MISO_PIN, PAL_MODE_INPUT_PULLUP);
 	palSetPadMode(DRV8323S_SCK_GPIO, DRV8323S_SCK_PIN, PAL_MODE_OUTPUT_PUSHPULL | PAL_STM32_OSPEED_HIGHEST);
+#ifdef DRV8323S_CS_GPIO
 	palSetPadMode(DRV8323S_CS_GPIO, DRV8323S_CS_PIN, PAL_MODE_OUTPUT_PUSHPULL | PAL_STM32_OSPEED_HIGHEST);
+#endif
 	palSetPadMode(DRV8323S_MOSI_GPIO, DRV8323S_MOSI_PIN, PAL_MODE_OUTPUT_PUSHPULL | PAL_STM32_OSPEED_HIGHEST);
 	palSetPad(DRV8323S_MOSI_GPIO, DRV8323S_MOSI_PIN);
 
@@ -162,14 +164,14 @@ void drv8323s_set_current_amp_gain(int gain) {
 void drv8323s_dccal_on(void)
 {
 	int reg = drv8323s_read_reg(6);
-	reg |= (1 << 2);
+	reg |= (7 << 2); /* TODO: Check this, should be bits 2,3,4 */
 	drv8323s_write_reg(6, reg);
 }
 
 void drv8323s_dccal_off(void)
 {
 	int reg = drv8323s_read_reg(6);
-	reg &= ~(1 << 2);
+	reg &= ~(7 << 2);
 	drv8323s_write_reg(6, reg);
 }
 
@@ -377,11 +379,15 @@ static void spi_transfer(uint16_t *in_buf, const uint16_t *out_buf, int length) 
 }
 
 static void spi_begin(void) {
-	palClearPad(DRV8323S_CS_GPIO, DRV8323S_CS_PIN);
+#ifdef DRV8323S_CS_GPIO
+    palClearPad(DRV8323S_CS_GPIO, DRV8323S_CS_PIN);
+#endif
 }
 
 static void spi_end(void) {
+#ifdef DRV8323S_CS_GPIO
 	palSetPad(DRV8323S_CS_GPIO, DRV8323S_CS_PIN);
+#endif
 }
 
 static void spi_delay(void) {

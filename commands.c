@@ -37,10 +37,10 @@
 #include "utils.h"
 #include "packet.h"
 #include "encoder.h"
-#include "nrf_driver.h"
+//#include "nrf_driver.h"
 #include "gpdrive.h"
 #include "confgenerator.h"
-#include "imu.h"
+//#include "imu.h"
 #include "shutdown.h"
 #if HAS_BLACKMAGIC
 #include "bm_if.h"
@@ -199,9 +199,9 @@ void commands_process_packet(unsigned char *data, unsigned int len,
 		break;
 
 	case COMM_ERASE_NEW_APP_ALL_CAN:
-		if (nrf_driver_ext_nrf_running()) {
+		/*if (nrf_driver_ext_nrf_running()) {
 			nrf_driver_pause(6000);
-		}
+		}*/
 
 		data[-1] = COMM_ERASE_NEW_APP;
 		comm_can_send_buffer(255, data - 1, len + 1, 2);
@@ -211,9 +211,9 @@ void commands_process_packet(unsigned char *data, unsigned int len,
 	case COMM_ERASE_NEW_APP: {
 		int32_t ind = 0;
 
-		if (nrf_driver_ext_nrf_running()) {
+		/*if (nrf_driver_ext_nrf_running()) {
 			nrf_driver_pause(6000);
-		}
+		}*/
 		uint16_t flash_res = flash_helper_erase_new_app(buffer_get_uint32(data, &ind));
 
 		ind = 0;
@@ -235,9 +235,9 @@ void commands_process_packet(unsigned char *data, unsigned int len,
 			len = decompressed_len + 4;
 		}
 
-		if (nrf_driver_ext_nrf_running()) {
+		/*if (nrf_driver_ext_nrf_running()) {
 			nrf_driver_pause(2000);
-		}
+		}*/
 
 		data[-1] = COMM_WRITE_NEW_APP_DATA;
 
@@ -259,9 +259,9 @@ void commands_process_packet(unsigned char *data, unsigned int len,
 		int32_t ind = 0;
 		uint32_t new_app_offset = buffer_get_uint32(data, &ind);
 
-		if (nrf_driver_ext_nrf_running()) {
+		/*if (nrf_driver_ext_nrf_running()) {
 			nrf_driver_pause(2000);
-		}
+		}*/
 		uint16_t flash_res = flash_helper_write_new_app_data(new_app_offset, data + ind, len - ind);
 
 		ind = 0;
@@ -526,15 +526,15 @@ void commands_process_packet(unsigned char *data, unsigned int len,
 		reply_func(send_buffer, ind);
 	} break;
 
-	case COMM_GET_DECODED_CHUK: {
+	case COMM_GET_DECODED_CHUK: /*{
 		int32_t ind = 0;
 		uint8_t send_buffer[50];
 		send_buffer[ind++] = COMM_GET_DECODED_CHUK;
 		buffer_append_int32(send_buffer, (int32_t)(app_nunchuk_get_decoded_chuk() * 1000000.0), &ind);
 		reply_func(send_buffer, ind);
-	} break;
+	}*/ break;
 
-	case COMM_GET_DECODED_BALANCE: {
+	case COMM_GET_DECODED_BALANCE: /*{
 		int32_t ind = 0;
 		uint8_t send_buffer[50];
 		send_buffer[ind++] = COMM_GET_DECODED_BALANCE;
@@ -547,13 +547,13 @@ void commands_process_packet(unsigned char *data, unsigned int len,
 		buffer_append_uint16(send_buffer, app_balance_get_state(), &ind);
 		buffer_append_uint16(send_buffer, app_balance_get_switch_value(), &ind);
 		reply_func(send_buffer, ind);
-	} break;
+	}*/ break;
 
 	case COMM_FORWARD_CAN:
 		comm_can_send_buffer(data[0], data + 1, len - 1, 0);
 		break;
 
-	case COMM_SET_CHUCK_DATA: {
+	case COMM_SET_CHUCK_DATA: /*{
 		chuck_data chuck_d_tmp;
 
 		int32_t ind = 0;
@@ -573,7 +573,7 @@ void commands_process_packet(unsigned char *data, unsigned int len,
 			chuck_d_tmp.is_rev = false;
 		}
 		app_nunchuk_update_output(&chuck_d_tmp);
-	} break;
+	}*/ break;
 
 	case COMM_CUSTOM_APP_DATA:
 		if (appdata_func) {
@@ -581,7 +581,7 @@ void commands_process_packet(unsigned char *data, unsigned int len,
 		}
 		break;
 
-	case COMM_NRF_START_PAIRING: {
+	case COMM_NRF_START_PAIRING: /*{
 		int32_t ind = 0;
 		nrf_driver_start_pairing(buffer_get_int32(data, &ind));
 
@@ -590,7 +590,7 @@ void commands_process_packet(unsigned char *data, unsigned int len,
 		send_buffer[ind++] = packet_id;
 		send_buffer[ind++] = NRF_PAIR_STARTED;
 		reply_func(send_buffer, ind);
-	} break;
+	}*/ break;
 
 	case COMM_GPD_SET_FSW: {
 		timeout_reset();
@@ -821,7 +821,7 @@ void commands_process_packet(unsigned char *data, unsigned int len,
 		}
 	} break;
 
-	case COMM_EXT_NRF_PRESENT: {
+	case COMM_EXT_NRF_PRESENT: /*{
 		if (!conf_general_permanent_nrf_found) {
 			nrf_driver_init_ext_nrf();
 			if (!nrf_driver_is_pairing()) {
@@ -835,11 +835,11 @@ void commands_process_packet(unsigned char *data, unsigned int len,
 				commands_send_packet_nrf(send_buffer, 5);
 			}
 		}
-	} break;
+	}*/ break;
 
-	case COMM_EXT_NRF_ESB_RX_DATA: {
+	case COMM_EXT_NRF_ESB_RX_DATA: /*{
 		nrf_driver_process_packet(data, len);
-	} break;
+	}*/ break;
 
 	case COMM_APP_DISABLE_OUTPUT: {
 		int32_t ind = 0;
@@ -860,7 +860,7 @@ void commands_process_packet(unsigned char *data, unsigned int len,
 		chMtxUnlock(&terminal_mutex);
 		break;
 
-	case COMM_GET_IMU_DATA: {
+	case COMM_GET_IMU_DATA: /*{
 		int32_t ind = 0;
 		uint8_t send_buffer[70];
 		send_buffer[ind++] = packet_id;
@@ -931,12 +931,12 @@ void commands_process_packet(unsigned char *data, unsigned int len,
 		}
 
 		reply_func(send_buffer, ind);
-	} break;
+	}*/ break;
 
 	case COMM_ERASE_BOOTLOADER_ALL_CAN:
-		if (nrf_driver_ext_nrf_running()) {
+		/*if (nrf_driver_ext_nrf_running()) {
 			nrf_driver_pause(6000);
-		}
+		}*/
 
 		data[-1] = COMM_ERASE_BOOTLOADER;
 		comm_can_send_buffer(255, data - 1, len + 1, 2);
@@ -946,9 +946,9 @@ void commands_process_packet(unsigned char *data, unsigned int len,
 	case COMM_ERASE_BOOTLOADER: {
 		int32_t ind = 0;
 
-		if (nrf_driver_ext_nrf_running()) {
+		/*if (nrf_driver_ext_nrf_running()) {
 			nrf_driver_pause(6000);
-		}
+		}*/
 		uint16_t flash_res = flash_helper_erase_bootloader();
 
 		ind = 0;
