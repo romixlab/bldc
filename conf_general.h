@@ -21,8 +21,8 @@
 #define CONF_GENERAL_H_
 
 // Firmware version
-#define FW_VERSION_MAJOR		3
-#define FW_VERSION_MINOR		63
+#define FW_VERSION_MAJOR		4
+#define FW_VERSION_MINOR		01
 
 #include "datatypes.h"
 
@@ -70,6 +70,9 @@
 // #define HW_SOURCE "hw_60.c"
 // #define HW_HEADER "hw_60.h"
 
+// Mark3 version of HW60 with power switch and separate NRF UART.
+//#define HW60_IS_MK3
+
 //#define HW_SOURCE "hw_r2.c"
 //#define HW_HEADER "hw_r2.h"
 
@@ -81,6 +84,9 @@
 
 //#define HW_SOURCE "hw_axiom.c"
 //#define HW_HEADER "hw_axiom.h"
+
+//#define HW_SOURCE "hw_luna_bbshd.c"
+//#define HW_HEADER "hw_luna_bbshd.h"
 
 //#define HW_SOURCE "hw_rh.c"
 //#define HW_HEADER "hw_rh.h"
@@ -121,6 +127,11 @@
 #define HW_HEADER "hw_3030.h"
 #define HW_SOURCE "hw_3030.c"
 
+//#define HW_SOURCE "hw_rd2.c"
+//#define HW_HEADER "hw_rd2.h"
+
+//#define HW_SOURCE "hw_100_250.c"
+//#define HW_HEADER "hw_100_250.h"
 #endif
 
 #ifndef HW_SOURCE
@@ -159,6 +170,7 @@
  * Set APP_CUSTOM_TO_USE to the name of the main C file of the custom application.
  */
 //#define APP_CUSTOM_TO_USE			"app_custom_template.c"
+//#define APP_CUSTOM_TO_USE			"app_motor_heater.c"
 //#include "app_erockit_conf.h"
 
 #include "hw.h"
@@ -229,6 +241,9 @@
 // Use the pins for the hardware SPI port instead of the hall/encoder pins for the AS5047
 #ifndef AS5047_USE_HW_SPI_PINS
 #define AS5047_USE_HW_SPI_PINS		0
+#endif
+#ifndef AD2S1205_USE_HW_SPI_PINS
+#define AD2S1205_USE_HW_SPI_PINS	0
 #endif
 
 /*

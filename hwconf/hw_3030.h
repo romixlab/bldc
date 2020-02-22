@@ -65,7 +65,7 @@
 #define V_REG					3.3
 #endif
 #ifndef VIN_R1
-#define VIN_R1					62000.0
+#define VIN_R1					22100.0
 #endif
 #ifndef VIN_R2
 #define VIN_R2					3600.0
@@ -88,6 +88,8 @@
 #define LMT87Q1_SQR(v_temp_mv)	(powf(-13.582, 2) + 4 * 0.00433 * (2230.8 - v_temp_mv))
 #define M_TEMP_MV               (((float)ADC_Value[ADC_IND_TEMP_MOTOR] / 4096.0) * V_REG * 1000)
 #define NTC_TEMP_MOTOR(beta)	( (13.582 - sqrtf(LMT87Q1_SQR(M_TEMP_MV))) / (2 * (-0.00433)) + 30 )
+
+#define NTC_RES_MOTOR(adc_val)	(10000.0 / ((4095.0 / (float)adc_val) - 1.0)) // Motor temp sensor on low side
 
 // Voltage on ADC channel
 #define ADC_VOLTS(ch)			((float)ADC_Value[ch] / 4096.0 * V_REG)
@@ -193,8 +195,8 @@
 #endif
 
 // Setting limits
-#define HW_LIM_CURRENT			-40.0, 40.0
-#define HW_LIM_CURRENT_IN		-40.0, 40.0
+#define HW_LIM_CURRENT			-60.0, 60.0
+#define HW_LIM_CURRENT_IN		-60.0, 60.0
 #define HW_LIM_CURRENT_ABS		0.0, 60.0
 #define HW_LIM_VIN				6.0, 57.0
 #define HW_LIM_ERPM				-200e3, 200e3
