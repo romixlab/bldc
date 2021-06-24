@@ -106,9 +106,7 @@ include $(CHIBIOS)/os/rt/ports/ARMCMx/compilers/GCC/mk/port_v7m.mk
 # Other files
 include hwconf/hwconf.mk
 include applications/applications.mk
-include nrf/nrf.mk
 include libcanard/canard.mk
-include imu/imu.mk
 include compression/compression.mk
 include blackmagic/blackmagic.mk
 
@@ -135,7 +133,6 @@ CSRC = $(STARTUPSRC) \
        digital_filter.c \
        ledpwm.c \
        mcpwm.c \
-       servo_dec.c \
        utils.c \
        servo_simple.c \
        packet.c \
@@ -145,8 +142,6 @@ CSRC = $(STARTUPSRC) \
        commands.c \
        timeout.c \
        comm_can.c \
-       ws2811.c \
-       led_external.c \
        encoder.c \
        flash_helper.c \
        mc_interface.c \
@@ -163,9 +158,7 @@ CSRC = $(STARTUPSRC) \
        bms.c \
        $(HWSRC) \
        $(APPSRC) \
-       $(NRFSRC) \
        $(CANARDSRC) \
-       $(IMUSRC) \
        $(COMPRESSIONSRC) \
        $(BLACKMAGICSRC)
 
@@ -204,9 +197,7 @@ INCDIR = $(STARTUPINC) $(KERNINC) $(PORTINC) $(OSALINC) \
          appconf \
          $(HWINC) \
          $(APPINC) \
-         $(NRFINC) \
          $(CANARDINC) \
-         $(IMUINC) \
          $(COMPRESSIONINC) \
          $(BLACKMAGICINC)
 

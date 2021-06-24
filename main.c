@@ -39,16 +39,10 @@
 #include "commands.h"
 #include "timeout.h"
 #include "comm_can.h"
-#include "ws2811.h"
-#include "led_external.h"
 #include "encoder.h"
 #include "servo_simple.h"
 #include "utils.h"
-#include "nrf_driver.h"
-#include "rfhelp.h"
-#include "spi_sw.h"
 #include "timer.h"
-#include "imu.h"
 #include "flash_helper.h"
 #if HAS_BLACKMAGIC
 #include "bm_if.h"
@@ -223,6 +217,7 @@ int main(void) {
 	hw_init_gpio();
 	LED_RED_OFF();
 	LED_GREEN_OFF();
+	LED_BLUE_ON();
 
 	timer_init();
 	conf_general_init();

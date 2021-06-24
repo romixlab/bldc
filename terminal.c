@@ -602,7 +602,7 @@ void terminal_process_string(char *str) {
 				uint8_t buffer[2];
 				buffer[0] = COMM_EXT_NRF_SET_ENABLED;
 				buffer[1] = enabled;
-				commands_send_packet_nrf(buffer, 2);
+				//commands_send_packet_nrf(buffer, 2);
 			} else {
 				commands_printf("Invalid argument(s).\n");
 			}

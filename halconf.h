@@ -87,11 +87,11 @@
 #endif
 
 /**
- * @brief   Enables the ICU subsystem.
+ * @brief   NOT Enables the ICU subsystem.
  */
-#if !defined(HAL_USE_ICU) || defined(__DOXYGEN__)
-#define HAL_USE_ICU                 TRUE
-#endif
+// #if !defined(HAL_USE_ICU) || defined(__DOXYGEN__)
+#define HAL_USE_ICU                 FALSE
+// #endif
 
 /**
  * @brief   Enables the MAC subsystem.

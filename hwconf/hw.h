@@ -314,12 +314,12 @@
 #endif
 
 // ADC Channels
-#ifndef ADC_IND_EXT3
-#define ADC_IND_EXT3 			ADC_IND_EXT
-#endif
-#ifndef ADC_IND_EXT2
-#define ADC_IND_EXT2 			ADC_IND_EXT
-#endif
+// #ifndef ADC_IND_EXT3
+// #define ADC_IND_EXT3 			ADC_IND_EXT
+// #endif
+// #ifndef ADC_IND_EXT2
+// #define ADC_IND_EXT2 			ADC_IND_EXT
+// #endif
 
 // Adc voltage scaling on phases and input
 #ifndef ADC_VOLTS_PH_FACTOR
@@ -330,30 +330,30 @@
 #endif
 
 // NRF SW SPI (default to spi header pins)
-#ifndef NRF_PORT_CSN
-#define NRF_PORT_CSN			HW_SPI_PORT_NSS
-#endif
-#ifndef NRF_PIN_CSN
-#define NRF_PIN_CSN				HW_SPI_PIN_NSS
-#endif
-#ifndef NRF_PORT_SCK
-#define NRF_PORT_SCK			HW_SPI_PORT_SCK
-#endif
-#ifndef NRF_PIN_SCK
-#define NRF_PIN_SCK				HW_SPI_PIN_SCK
-#endif
-#ifndef NRF_PORT_MOSI
-#define NRF_PORT_MOSI			HW_SPI_PORT_MOSI
-#endif
-#ifndef NRF_PIN_MOSI
-#define NRF_PIN_MOSI			HW_SPI_PIN_MOSI
-#endif
-#ifndef NRF_PORT_MISO
-#define NRF_PORT_MISO			HW_SPI_PORT_MISO
-#endif
-#ifndef NRF_PIN_MISO
-#define NRF_PIN_MISO			HW_SPI_PIN_MISO
-#endif
+// #ifndef NRF_PORT_CSN
+// #define NRF_PORT_CSN			HW_SPI_PORT_NSS
+// #endif
+// #ifndef NRF_PIN_CSN
+// #define NRF_PIN_CSN				HW_SPI_PIN_NSS
+// #endif
+// #ifndef NRF_PORT_SCK
+// #define NRF_PORT_SCK			HW_SPI_PORT_SCK
+// #endif
+// #ifndef NRF_PIN_SCK
+// #define NRF_PIN_SCK				HW_SPI_PIN_SCK
+// #endif
+// #ifndef NRF_PORT_MOSI
+// #define NRF_PORT_MOSI			HW_SPI_PORT_MOSI
+// #endif
+// #ifndef NRF_PIN_MOSI
+// #define NRF_PIN_MOSI			HW_SPI_PIN_MOSI
+// #endif
+// #ifndef NRF_PORT_MISO
+// #define NRF_PORT_MISO			HW_SPI_PORT_MISO
+// #endif
+// #ifndef NRF_PIN_MISO
+// #define NRF_PIN_MISO			HW_SPI_PIN_MISO
+// #endif
 
 // CAN device and port (default CAN1)
 #ifndef HW_CANRX_PORT
