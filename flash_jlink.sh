@@ -1,0 +1,1 @@
+JLinkExe -commanderscript ./flash.jlink
