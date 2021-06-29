@@ -11,7 +11,7 @@
 // J9 connector function configuration
 // Pinout = +3V3, PA4, PA5, PA6=PB10, PA7=PB11, GND. PB10 is shorted to PA6, PB11 is shorted to PA7.
 // PA4 and PA5 is initialised as ADC right now
-//#define HW_UART_PB10_PB11
+#define HW_UART_PB10_PB11
 //#define HW_I2C_PB10_PB11
 //#define HW_SPI_PA4_PA5_PA6_PA7
 
@@ -57,9 +57,9 @@
 #define ADC_IND_SENS1			0
 #define ADC_IND_SENS2			1
 #define ADC_IND_SENS3			2
-#define ADC_IND_CURR1			5
+#define ADC_IND_CURR1			3
 #define ADC_IND_CURR2			4
-#define ADC_IND_CURR3			3
+#define ADC_IND_CURR3			5
 #define ADC_IND_VIN_SENS		11
 // #define ADC_IND_EXT			6
 // #define ADC_IND_EXT2			7
@@ -81,7 +81,7 @@
 #define VIN_R2					4990.0
 #endif
 #ifndef CURRENT_AMP_GAIN
-#define CURRENT_AMP_GAIN		20.0
+#define CURRENT_AMP_GAIN		40.0
 #endif
 #ifndef CURRENT_SHUNT_RES
 #define CURRENT_SHUNT_RES		0.01
